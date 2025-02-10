@@ -1,8 +1,65 @@
-# React + Vite
+# React + Vite Карточная игра "Дурак"
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Этот проект представляет собой реализацию карточной игры "Дурак" с использованием React, Vite и Socket.IO.
 
-Currently, two official plugins are available:
+## Текущий статус разработки
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+На данный момент реализовано:
+
+1. ✅ Базовая структура проекта
+2. ✅ Настройка Socket.IO для клиента и сервера
+3. ✅ Компонент Card для отображения карт
+4. ✅ Базовый интерфейс игры
+5. ✅ Форма ввода имени игрока
+6. ✅ Автоматическое создание игровой комнаты
+
+Остановились на проблеме:
+
+- Состояние игры не приходит с сервера на клиент
+- Индикатор загрузки крутится бесконечно
+
+Следующие шаги:
+
+1. Отладить передачу состояния игры от сервера к клиенту
+2. Реализовать логику хода игрока
+3. Реализовать логику хода бота
+4. Добавить анимации для карт
+5. Улучшить визуальное оформление
+
+## Запуск проекта
+
+### Сервер
+
+```bash
+npm run server
+```
+
+### Клиент
+
+```bash
+npm run dev
+```
+
+## Структура проекта
+
+- `src/components/Card.jsx` - Компонент карты
+- `src/pages/Game.jsx` - Основной компонент игры
+- `src/pages/Home.jsx` - Стартовая страница с вводом имени
+- `src/services/socket.js` - Настройка Socket.IO клиента
+- `server.js` - Серверная часть с игровой логикой
+
+## Технологии
+
+- React
+- Vite
+- Socket.IO
+- Material-UI
+- Express
+
+## TODO
+
+- [ ] Исправить проблему с получением состояния игры
+- [ ] Добавить обработку ошибок подключения
+- [ ] Реализовать базовую игровую логику
+- [ ] Добавить анимации
+- [ ] Улучшить дизайн
