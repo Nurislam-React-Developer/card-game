@@ -1,12 +1,28 @@
+import { useDraggable } from '@dnd-kit/core';
 import { Paper, Typography } from '@mui/material';
 
-const Card = ({ suit, value, onClick, isPlayable }) => {
+const Card = ({ suit, value, onClick, isPlayable, id }) => {
+	const { attributes, listeners, setNodeRef, transform, isDragging } =
+		useDraggable({
+			id: id || `${suit}-${value}`,
+			disabled: !isPlayable,
+		});
+
 	const getColor = () => {
 		return suit === '♥' || suit === '♦' ? 'red' : 'black';
 	};
 
+	const style = transform
+		? {
+				transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+				zIndex: isDragging ? 1000 : 1,
+				opacity: isDragging ? 0.8 : 1,
+		  }
+		: undefined;
+
 	return (
 		<Paper
+			ref={setNodeRef}
 			elevation={3}
 			sx={{
 				width: 60,
@@ -15,7 +31,7 @@ const Card = ({ suit, value, onClick, isPlayable }) => {
 				flexDirection: 'column',
 				justifyContent: 'space-between',
 				padding: '5px',
-				cursor: isPlayable ? 'pointer' : 'default',
+				cursor: isPlayable ? 'grab' : 'default',
 				'&:hover': isPlayable
 					? {
 							transform: 'translateY(-10px)',
@@ -23,9 +39,11 @@ const Card = ({ suit, value, onClick, isPlayable }) => {
 					  }
 					: {},
 				position: 'relative',
-				backgroundColor: 'white',
+				touchAction: 'none',
+				...style,
 			}}
-			onClick={isPlayable ? onClick : undefined}
+			{...attributes}
+			{...listeners}
 		>
 			<Typography sx={{ color: getColor(), fontSize: '1.2rem' }}>
 				{value}
